@@ -1,13 +1,19 @@
 import * as Express from 'express'
 import { Config } from './config'
-import { Request, Response } from 'express';
+import { PathConfiguration } from './types/definitions';
+import { Router } from './routes/main.router';
 
 const app = Express();
 
-app.route('/')
-    .all((req: Request, res: Response) => {
-        res.send('Jello');
-    });
+function loadPath(config: PathConfiguration) {
+    app.use(config.path, config.router);
+}
 
+Router.forEach((pathConfig: PathConfiguration) => {
+    loadPath(pathConfig);
+});
+
+// start server
 app.listen(Config.server.port);
 console.log(`Listening on port ${Config.server.port}`);
+console.log();
