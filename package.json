@@ -1,0 +1,12 @@
+{
+  "name": "apxjcl_server",
+  "version": "1.0.0",
+  "description": "Backend API for my server",
+  "main": "dist/server.js",
+  "author": "apexjcl",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^8.0.24",
+    "typescript": "^2.4.2"
+  }
+}
