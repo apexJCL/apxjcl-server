@@ -5,12 +5,14 @@ import { PathConfiguration } from './types/definitions';
 import { Router } from './routes/main.router';
 import * as Morgan from 'morgan';
 import * as BodyParser from 'body-parser';
+import * as cors from 'cors'
 
 
 Mongoose.Promise = require('bluebird');
 const app = Express();
 
 // Config
+app.use(cors());
 app.use(Morgan(Config.server.morgan));
 app.use(BodyParser.json());
 app.use(BodyParser.urlencoded({extended: true}));

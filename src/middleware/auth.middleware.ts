@@ -3,7 +3,7 @@ import { JWTHandler } from '../utils/jwt.generator'
 
 class AuthMiddleware {
     static tokenAuth(req: Request, res: Response, next: NextFunction) {
-        let token = req.header('Authorization') || req.param('token') || null;
+        let token = req.header('Authorization') || null;
         if (!token) {
             return res.status(401).send('Unauthorized');
         }
