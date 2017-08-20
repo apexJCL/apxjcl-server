@@ -13,7 +13,7 @@ const app = Express();
 // Config
 app.use(Morgan(Config.server.morgan));
 app.use(BodyParser.json());
-app.use(BodyParser.urlencoded({ extended: true }));
+app.use(BodyParser.urlencoded({extended: true}));
 
 // Connect to database
 const db = Mongoose.connect(Config.mongodb.url, {

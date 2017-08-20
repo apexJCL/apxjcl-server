@@ -1,4 +1,5 @@
 import { Document, model, Schema } from 'mongoose'
+import { JWTHandler } from '../utils/jwt.generator'
 import * as BCrypt from 'bcrypt'
 
 export interface IUser extends Document {
@@ -18,14 +19,19 @@ export const UserSchema = new Schema({
             type: String,
             required: true
         }
-    },
-    {
+    }, {
         timestamps: true
     }
 );
 
 UserSchema.methods.checkPassword = function (password: string) {
     return BCrypt.compare(password, this.password);
+};
+
+UserSchema.methods.generateToken = function () {
+    return JWTHandler.sign({
+        username: this.username
+    })
 };
 
 UserSchema.pre('save', function (this: any, next) {
@@ -39,7 +45,7 @@ UserSchema.pre('save', function (this: any, next) {
         })
         .catch(e => {
             console.log(e);
-            return false;
+            return next(e);
         })
 });
 
